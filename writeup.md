@@ -1,6 +1,5 @@
 
 
-
 **Finding Lane Lines on the Road**
 
 The goals / steps of this project are the following:
@@ -17,6 +16,7 @@ The goals / steps of this project are the following:
 [region]:./pipeline/solidYellowCurve_region.png "Region of Interest"
 [hough]:./pipeline/solidYellowCurve_hough.png "Hough Line Selection"
 [out]: ./pipeline/solidYellowCurve_out.png "Final Output"
+[horizontal]: ./Horizontal.jpg "Horizontal line"
 
 ---
 
@@ -67,6 +67,29 @@ There are several potential shortcomings:
 - the region of interest is hard coded. This will change on roads with slopes
 - the lane lines are assumed straight lines
 - the contrast of lanes are assumed high enough so that edge detection can filtering out noise
+
+
+#  !!!*Update from first review*
+The parameters for Hough Line selection is optimized, 
+originally they were set very small
+
+##  Before
+*threshold = 5*
+*minimalLenght= 20*
+*maximumGap = 10*
+
+## After
+*threshold = 80*
+*minimalLenght= 80*
+*maximumGap = 50*
+
+- I realized that I did not understand the meaning of these parameters, so the result was bad. But by increasing these values, short lines are filtered out.
+
+- Besides the Draw_lines are also optimized to remove lines with slope ~ 0. Here is example which caused the abnomality with my old code.
+![alt text][Horizontal]
+
+- the threshold can not be set too large, if too large e.g. >120, the segmented lane will be filtered out
+
 
 
 ### 3. Suggest possible improvements to your pipeline
